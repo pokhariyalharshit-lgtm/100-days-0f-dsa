@@ -1,0 +1,19 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool dfsCheck(int node, vector<int> adj[], int vis[], int pathVis[]) {
+    vis[node] = 1;
+    pathVis[node] = 1;
+    for(auto it : adj[node]) {
+        if(!vis[it]) {
+            if(dfsCheck(it, adj, vis, pathVis) == true)
+                return true;
+        }
+        else if(pathVis[it]) {
+            return true;
+        }
+    }
+    pathVis[node] = 0;
+    return false;
+}
